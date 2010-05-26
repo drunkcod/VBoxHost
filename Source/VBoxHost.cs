@@ -7,6 +7,8 @@ namespace VBoxHost
 {
     public class VBoxHost : ServiceBase
     {
+        public void Start() { OnStart(new string[0]); }
+
         protected override void OnStart(string[] args) {
             EnsureVBoxSvc();
             File.AppendAllText("VBoxHost.log", "OnStart" + "\r\n");

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ServiceProcess;
 
 namespace VBoxHost
 {
@@ -9,18 +7,14 @@ namespace VBoxHost
     {
         static void Main(string[] args)
         {
+            var host = new VBoxHost();
             if (Environment.UserInteractive) {
-                var startInfo = new ProcessStartInfo();
-                startInfo.Arguments = "-q list vms";
-                startInfo.FileName = "C:\\Program Files\\Oracle\\VirtualBox\\VBoxManage.exe";
-                startInfo.UseShellExecute = false;
-                startInfo.RedirectStandardOutput = true;
-                var host = Process.Start(startInfo);
-                host.WaitForExit();
-                Console.WriteLine(host.StandardOutput.ReadToEnd());
+                host.Start();
+                Console.WriteLine("<press any key to stop host>");
+                Console.ReadKey();
+                host.Stop();
             } else {
-                var service = new VBoxHost();
-                ServiceBase.Run(service);
+                ServiceBase.Run(host);
             }
         }
     }
