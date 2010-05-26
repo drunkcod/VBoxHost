@@ -8,6 +8,8 @@ namespace VBoxHost
         static void Main(string[] args)
         {
             var host = new VBoxHost();
+            foreach (var item in args)
+                host.AddMachine(item);
             if (Environment.UserInteractive) {
                 host.Start();
                 Console.WriteLine("<press any key to stop host>");
