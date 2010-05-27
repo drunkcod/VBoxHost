@@ -19,8 +19,7 @@ namespace VBoxHost
         }
 
         static string TranslateMachineMode(VirtualMachineMode mode) {
-            switch (mode)
-            {
+            switch (mode) {
                 default: return "gui";
                 case VirtualMachineMode.Sdl: return "sdl";
                 case VirtualMachineMode.Vrdp: return "vrdp";

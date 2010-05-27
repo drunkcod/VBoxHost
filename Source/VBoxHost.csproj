@@ -47,13 +47,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="VBoxHost.cs">
+    <Compile Include="VirtualBoxHostService.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VBoxHostInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="VirtualBox.cs" />
     <Compile Include="VirtualMachine.cs" />
+    <Compile Include="VirtualMachineMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
