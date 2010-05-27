@@ -18,7 +18,7 @@ namespace VBoxHost
         protected override void OnStart(string[] args) {
             VirtualBox.EnsureVBoxSvc();
             Info("OnStart");
-            machines.ForEach(machine => machine.Start(VirtualMachineMode.Vrdp));
+            machines.ForEach(x => x.Start(VirtualMachineMode.Vrdp));
         }
 
         protected override void OnStop() {

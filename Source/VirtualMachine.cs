@@ -11,11 +11,11 @@ namespace VBoxHost
         }
 
         public void Start(VirtualMachineMode mode) {
-            VBoxManage(string.Format("-q startvm \"{0}\" --type {1}", nameOrId, TranslateMachineMode(mode)));
+            VBoxManage("-q startvm \"{0}\" --type {1}", nameOrId, TranslateMachineMode(mode));
         }
 
         public void PowerOff() {
-            VBoxManage(string.Format("-q controlvm \"{0}\" poweroff", nameOrId));
+            VBoxManage("-q controlvm \"{0}\" poweroff", nameOrId);
         }
 
         static string TranslateMachineMode(VirtualMachineMode mode) {
@@ -27,10 +27,10 @@ namespace VBoxHost
             }
         }
 
-        static void VBoxManage(string arguments) {
+        static void VBoxManage(string format, params object[] args) {
             var startInfo = new ProcessStartInfo();
             startInfo.FileName = VirtualBox.Command("VBoxManage.exe");
-            startInfo.Arguments = arguments;
+            startInfo.Arguments = string.Format(format, args);
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
             var host = Process.Start(startInfo);
