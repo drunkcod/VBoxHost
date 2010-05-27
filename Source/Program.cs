@@ -5,8 +5,7 @@ namespace VBoxHost
 {
     class Program
     {
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
             var host = new VBoxHost();
             foreach (var item in args)
                 host.AddMachine(item);
