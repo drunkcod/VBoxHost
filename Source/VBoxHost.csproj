@@ -55,7 +55,6 @@
     </Compile>
     <Compile Include="VirtualBox.cs" />
     <Compile Include="VirtualMachine.cs" />
-    <Compile Include="VirtualMachineMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

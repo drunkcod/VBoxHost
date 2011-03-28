@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.ServiceProcess;
-using System.Threading;
 
 namespace VBoxHost
 {
@@ -18,7 +16,7 @@ namespace VBoxHost
         protected override void OnStart(string[] args) {
             VirtualBox.EnsureVBoxSvc();
             Info("OnStart");
-            machines.ForEach(x => x.Start(VirtualMachineMode.Vrdp));
+            machines.ForEach(x => x.Start());
         }
 
         protected override void OnStop() {
