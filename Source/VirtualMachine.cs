@@ -4,15 +4,20 @@ namespace VBoxHost
 {
     class VirtualMachine
     {
+        readonly VirtualBoxBridge bridge;
         readonly string nameOrId;
         readonly Process headlessProcess;
 
-        public VirtualMachine(string nameOrId) {
+        public VirtualMachine(VirtualBoxBridge bridge, string nameOrId) {
+            this.bridge = bridge;
             this.nameOrId = nameOrId;
             this.headlessProcess = VBoxHeadless(nameOrId);
         }
 
+        public ILogger Logger { get; set; }
+
         public void Start() {
+            Logger.Info("Starting {0}", nameOrId);
             headlessProcess.Start();
         }
 
@@ -21,9 +26,9 @@ namespace VBoxHost
             headlessProcess.WaitForExit();
         }
 
-        static void VBoxManage(string format, params object[] args) {
+        void VBoxManage(string format, params object[] args) {
             var host = Process.Start(new ProcessStartInfo {
-                FileName = VirtualBox.Command("VBoxManage.exe"),
+                FileName = bridge.Command("VBoxManage.exe"),
                 Arguments = string.Format(format, args),
                 UseShellExecute = false,
                 RedirectStandardOutput = true
@@ -31,10 +36,10 @@ namespace VBoxHost
             host.WaitForExit();
         }
 
-        static Process VBoxHeadless(string machineName) {
+        Process VBoxHeadless(string machineName) {
             return new Process {
                 StartInfo = new ProcessStartInfo {
-                    FileName = VirtualBox.Command("VBoxHeadless.exe"),
+                    FileName = bridge.Command("VBoxHeadless.exe"),
                     Arguments = string.Format("-s \"{0}\" -v config", machineName),
                     UseShellExecute = false,
                     RedirectStandardOutput = true
